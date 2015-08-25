@@ -4,7 +4,7 @@
 PortSystem      1.0
 
 name            launch4j
-version         3.4
+version         3.8
 categories      java
 license         BSD
 maintainers     panayotis.com:panayotis
@@ -25,8 +25,8 @@ platforms       darwin
 master_sites    sourceforge
 distname        launch4j-${version}-macosx-x86
 extract.suffix  .tgz
-checksums       rmd160 3267bb1d24d0d457b2cf06596529565e3c343327 \
-                sha256 4d2c6c2928d2093b4be7d949aecbefe8b09c3660ea1ed400bd24f6f267f4eefe
+checksums       rmd160 a756f1024fb51c7dbfbe92a2c85dc78ef0832a9d \
+                sha256 08d04e6cf2063b7e707cdb50d3220b02d7075d2b98253162f1c779df4a929f66
 worksrcdir      launch4j
 
 use_configure   no
@@ -48,6 +48,7 @@ destroot {
     file delete -force ${worksrcpath}/.settings
     file delete ${worksrcpath}/build.xml
     file delete ${worksrcpath}/launch4j.jfpr
+    file delete -force ${worksrcpath}/maven
 
     # delete source files
     file delete -force ${worksrcpath}/head_src

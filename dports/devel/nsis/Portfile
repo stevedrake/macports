@@ -31,7 +31,7 @@ checksums		nsis-${version}-src.tar.bz2 \
 worksrcdir		nsis-${version}-src
 use_bzip2		yes
 
-depends_build		port:scons port:i386-mingw32-gcc
+depends_build		port:scons
 
 extract.only		nsis-${version}-src.tar.bz2
 
@@ -39,12 +39,18 @@ post-extract {
 	system "cd ${workpath} && unzip ${distpath}/nsis-${version}.zip"
 }
 
+patchfiles              patch-SConstruct.diff
+
 use_configure		no
+
+# nsis doesn't compile against libc++, which is the default in clang on 10.9
+# https://sourceforge.net/p/nsis/bugs/1085/
+compiler.whitelist      llvm-gcc-4.2 macports-llvm-gcc-4.2 gcc-4.2 apple-gcc-4.2
 
 # nsis can only ever be built 32-bit, but relies on libiconv. Since the dependency is limited to only iconv,
 # we will rely on the base system 32-bit libiconv installation. Should MacPorts switch to 32-bit/64-bit universal
 # builds by default, this decision should be revisited.
-set scons.args		"PREFIX=\"${prefix}\" PREFIX_DEST=\"${destroot}\" SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all"
+set scons.args		"PREFIX=\"${prefix}\" PREFIX_DEST=\"${destroot}\" CC=\"${configure.cc}\" CXX=\"${configure.cxx}\" SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all"
 # APPEND_CPPPATH=\"${prefix}/include\" APPEND_LIBPATH=\"${prefix}/lib\"
 
 build {

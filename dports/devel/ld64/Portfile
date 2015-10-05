@@ -50,7 +50,7 @@ subport ld64-97 {
     set makefile	"Makefile-97"
     set ld64_ver        97
 
-    compiler.blacklist-append *clang*
+    configure.compiler apple-gcc-4.2
 
     patchfiles \
         ld64-version.patch \
@@ -62,13 +62,6 @@ subport ld64-97 {
         ld64-97-no-Availability.h.patch \
         ld64-97-BaseAtomImplicitDecl.patch \
         ld64-97-no-ppc-thread_status.patch
-
-    if {${os.major} >= 14} {
-        pre-fetch {
-            ui_error "$subport is not supported on Yosemite or later."
-            error "unsupported platform"
-        }
-    }
 }
 
 subport ld64-127 {

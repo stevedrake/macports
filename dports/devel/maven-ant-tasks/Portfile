@@ -11,7 +11,7 @@ description         Use many of Maven's artifact handling features from Ant.
 long_description    ${description}
 homepage            http://maven.apache.org/ant-tasks/
 platforms           darwin
-depends_build       port:maven2
+depends_build       port:maven3
 
 use_zip             yes
 master_sites        http://www.apache.org/dist/maven/source/
@@ -23,7 +23,7 @@ checksums           md5     ae62c0c7f811f3f7fc60ad91a8b0b822 \
 use_configure       no
 
 build.env-append    MAVEN_OPTS=-Duser.home=${workpath}/.home
-build.cmd           mvn2
+build.cmd           mvn3
 build.target        package
 
 destroot {

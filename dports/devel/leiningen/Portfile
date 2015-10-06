@@ -13,12 +13,34 @@ supported_archs     noarch
 description         A build tool for Clojure designed to not set your hair on fire.
 long_description    ${description}
 
-checksums           rmd160  3900b5a12171362e483fc016bd1838ded08188a3 \
-                    sha256  55ff713f2ed15199fdd29fd87f76f2cb93ce308aa0483324edb1ca03e1db0f13
+master_sites        ${github.raw}/${git.branch}/bin:scripts \
+                    ${github.homepage}/releases/download/${git.branch}:releases
+distfiles           lein-pkg:scripts \
+                    leiningen-${version}-standalone.jar:releases
+
+checksums           lein-pkg \
+                        rmd160  3c18051aec001ce7b7d91ec1626f0e2bb1eb4bfd \
+                        sha256  bda09d9d1a35bf48287c9a3d980d40d589480241978be2cb7be2f611461934b7 \
+                    leiningen-${version}-standalone.jar \
+                        rmd160  e8b9d0370e56f82c49d23eecc0eedba2eeeafcc6 \
+                        sha256  e96ee50fbfa5a4725e99baa6dcaed8874847323c917e6d870d5dab2433f6a739
+
+extract {
+    foreach distfile ${extract.only} {
+        file copy ${distpath}/${distfile} ${workpath}
+    }
+}
+
+post-patch {
+    reinplace "s|/usr/share/java|${prefix}/share/java|" ${workpath}/lein-pkg
+}
 
 use_configure       no
+
 build {}
 
 destroot {
-    xinstall -m 0755 ${worksrcpath}/bin/lein ${destroot}${prefix}/bin
+    xinstall -m 0755 ${workpath}/lein-pkg ${destroot}${prefix}/bin/lein
+    xinstall -m 0755 -d ${destroot}${prefix}/share/java
+    xinstall -m 0644 ${workpath}/leiningen-${version}-standalone.jar ${destroot}${prefix}/share/java/
 }

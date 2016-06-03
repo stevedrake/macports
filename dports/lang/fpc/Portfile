@@ -4,8 +4,8 @@
 PortSystem          1.0
 
 name                fpc
-version             2.6.4
-revision            1
+version             3.0.0
+revision            0
 categories          lang
 platforms           darwin
 license             GPL-2 LGPL-2
@@ -19,8 +19,8 @@ set src             ${name}build-${version}.tar.gz
 set pp              universal-macosx-10.5-ppcuniversal.tar.bz2
 distfiles           ${src} ${pp}
 checksums           ${src} \
-                    rmd160  339b71d3c9983a720eed7c6bda1cfd330d89966f \
-                    sha256  8d9c3bcfa469d9b37c05663e2775d179809e4b3443604fac7d21aa64c9a56daa \
+                    rmd160  e921a79d1898b959ee71909d6cd2f036b00477bd \
+                    sha256  d5913b1d5d3d13190ae7ee72c305d5da49ac2ddc1b375b814751ef09ae5c80ec \
                     ${pp} \
                     rmd160  0124c2f4447ba7f96e3db0a27e6bff459c5749f4 \
                     sha256  e7243e83e6a04de147ebab7530754ec92cd1fbabbc9b6b00a3f90a796312f3e9
